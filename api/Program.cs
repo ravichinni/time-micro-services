@@ -5,9 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var  AllowAllOriginsCORSPolicy = "AllowAll";
 builder.Services.AddCors(options =>
     {
-        options.AddPolicy("AllowAll",
+        options.AddPolicy(AllowAllOriginsCORSPolicy,
             builder => builder.AllowAnyOrigin()
                               .AllowAnyMethod()
                               .AllowAnyHeader());
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(AllowAllOriginsCORSPolicy);
 //app.UseHttpsRedirection());
 app.MapControllers();
 
